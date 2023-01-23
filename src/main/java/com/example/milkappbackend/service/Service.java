@@ -1,10 +1,14 @@
 package com.example.milkappbackend.service;
 
+import com.example.milkappbackend.model.JsonFileReader;
 import com.example.milkappbackend.model.Milk;
 import com.example.milkappbackend.repository.JPAMilkRepository;
 import com.example.milkappbackend.repository.MilkRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 
@@ -19,12 +23,21 @@ public class Service {
     private ObjectMapper objectMapper;
     @Autowired
     MilkRepository repo;
-    @Autowired
-    private JPAMilkRepository jpaRepo;
 
-    public void loadData() throws IOException{
-        File jsonFile = new ClassPathResource("milk.json").getFile();
-        List<Milk> milks = objectMapper.readValue(jsonFile, new TypeReference<List<Milk>>() {});
-        jpaRepo.saveAll(milks);
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Transactional
+    public void loadData(String filePath) throws IOException {
+        JsonFileReader jsonFileReader = new JsonFileReader();
+        Milk[] data = (Milk[]) jsonFileReader.readJsonFile(filePath, Milk[].class);
+        for (Milk milk : data) {
+            entityManager.persist(milk);
+        }
+    }
+
+    public Object getAllMilk() {
+        return repo.getAllMilk();
     }
 }

@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 public class MilkRepository {
     @Autowired
     JPAMilkRepository repo;
+
+    public Object getAllMilk() {
+        return repo.findAll();
+    }
 }
