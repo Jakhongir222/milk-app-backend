@@ -1,12 +1,12 @@
 package com.example.milkappbackend.controller;
 
 import com.example.milkappbackend.dto.MilkDTO;
+import com.example.milkappbackend.model.Milk;
 import com.example.milkappbackend.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -37,7 +37,18 @@ public class Controller {
         return ResponseEntity.ok().build();
     }
 
-
-
-
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateMilk (@PathVariable String id, @RequestBody MilkDTO milkDTO){
+        Optional<Milk> existingMilk = (Optional<Milk>) service.getSpecificMilk(id);
+        if(!existingMilk.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        Milk milk = existingMilk.get();
+        milk.setName(milkDTO.name());
+        milk.setType(milkDTO.type());
+        milk.setStorage(milkDTO.storage());
+        milk.setId(milkDTO.id());
+        service.updateMilk(milk);
+        return ResponseEntity.ok().build();
+    }
 }

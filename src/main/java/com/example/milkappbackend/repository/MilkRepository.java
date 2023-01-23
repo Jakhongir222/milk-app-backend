@@ -25,4 +25,8 @@ public class MilkRepository {
     public void deleteMilk(String id) {
          repo.deleteById(id);
     }
+
+    public void updateMilk(Milk milk) {
+        repo.save(milk);
+    }
 }
