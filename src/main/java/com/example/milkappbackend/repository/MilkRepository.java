@@ -12,4 +12,8 @@ public class MilkRepository {
     public Object getAllMilk() {
         return repo.findAll();
     }
+
+    public Object getSpecificMilk(String id) {
+        return repo.findById(id);
+    }
 }

@@ -18,4 +18,9 @@ public class Controller {
     public ResponseEntity<?> getAllMilk(){
         return ResponseEntity.ok(service.getAllMilk());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getSpecificMilk(@PathVariable String id){
+        return ResponseEntity.ok(service.getSpecificMilk(id));
+    }
 }

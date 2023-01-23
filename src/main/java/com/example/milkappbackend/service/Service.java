@@ -40,4 +40,8 @@ public class Service {
     public Object getAllMilk() {
         return repo.getAllMilk();
     }
+
+    public Object getSpecificMilk(String id) {
+        return repo.getSpecificMilk(id);
+    }
 }
