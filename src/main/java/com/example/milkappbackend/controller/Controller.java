@@ -1,5 +1,6 @@
 package com.example.milkappbackend.controller;
 
+import com.example.milkappbackend.dto.MilkDTO;
 import com.example.milkappbackend.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,4 +24,20 @@ public class Controller {
     public ResponseEntity<?> getSpecificMilk(@PathVariable String id){
         return ResponseEntity.ok(service.getSpecificMilk(id));
     }
+
+    @PostMapping
+    public ResponseEntity<?> createNewMilk (@RequestBody MilkDTO milkDto){
+        service.createNewMilk(milkDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMilk(@PathVariable String id){
+        service.deleteMilk(id);
+        return ResponseEntity.ok().build();
+    }
+
+
+
+
 }

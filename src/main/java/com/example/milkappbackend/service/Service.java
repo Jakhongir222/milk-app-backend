@@ -1,5 +1,6 @@
 package com.example.milkappbackend.service;
 
+import com.example.milkappbackend.dto.MilkDTO;
 import com.example.milkappbackend.model.JsonFileReader;
 import com.example.milkappbackend.model.Milk;
 import com.example.milkappbackend.repository.JPAMilkRepository;
@@ -43,5 +44,13 @@ public class Service {
 
     public Object getSpecificMilk(String id) {
         return repo.getSpecificMilk(id);
+    }
+
+    public Object createNewMilk(MilkDTO milkDto) {
+        return repo.createNewMilk(new Milk(milkDto.id(), milkDto.name(), milkDto.type(), milkDto.storage()));
+    }
+
+    public void deleteMilk(String id) {
+         repo.deleteMilk(id);
     }
 }
