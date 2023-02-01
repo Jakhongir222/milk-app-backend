@@ -1,7 +1,6 @@
 package com.example.milkappbackend.service;
 
 import com.example.milkappbackend.dto.MilkDTO;
-import com.example.milkappbackend.model.JsonFileReader;
 import com.example.milkappbackend.model.Milk;
 import com.example.milkappbackend.repository.MilkRepository;
 import jakarta.persistence.EntityManager;
@@ -17,17 +16,6 @@ public class Service {
     MilkRepository repo;
 
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Transactional
-    public void loadData(String filePath) throws IOException {
-        JsonFileReader jsonFileReader = new JsonFileReader();
-        Milk[] data = (Milk[]) jsonFileReader.readJsonFile(filePath, Milk[].class);
-        for (Milk milk : data) {
-            entityManager.persist(milk);
-        }
-    }
 
     public Object getAllMilk() {
         return repo.getAllMilk();

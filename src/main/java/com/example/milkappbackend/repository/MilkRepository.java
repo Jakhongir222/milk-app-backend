@@ -15,7 +15,7 @@ public class MilkRepository {
     }
 
     public Object getSpecificMilk(String id) {
-        return repo.findById(id);
+        return repo.getMilkById(id);
     }
 
     public Object createNewMilk(Milk milk) {

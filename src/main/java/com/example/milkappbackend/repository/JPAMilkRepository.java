@@ -1,7 +1,10 @@
 package com.example.milkappbackend.repository;
 
 import com.example.milkappbackend.model.Milk;
-import org.springframework.data.repository.CrudRepository;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface JPAMilkRepository extends CrudRepository<Milk, String> {
+public interface JPAMilkRepository extends MongoRepository <Milk, String> {
+
+    Milk getMilkById(String id);
 }

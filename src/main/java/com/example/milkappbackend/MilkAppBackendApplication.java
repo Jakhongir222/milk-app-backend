@@ -10,7 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.File;
 
 @SpringBootApplication
-public class MilkAppBackendApplication implements CommandLineRunner {
+public class MilkAppBackendApplication {
 
 
     @Autowired
@@ -20,10 +20,4 @@ public class MilkAppBackendApplication implements CommandLineRunner {
         SpringApplication.run(MilkAppBackendApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        ClassPathResource resource = new ClassPathResource("milk.json");
-        File file = resource.getFile();
-        service.loadData(file.getAbsolutePath());
-    }
 }

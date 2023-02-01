@@ -1,20 +1,23 @@
 package com.example.milkappbackend.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
-@Entity
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+
+@Document("milkStore")
 public class Milk {
 
-    @Id
-    @Column(name = "id", nullable = false)
+
+    @MongoId(value = FieldType.OBJECT_ID)
+    private String docId;
     private String id;
-    @Column(name = "name")
+
     private String name;
-    @Column(name = "type")
+
     private String type;
-    @Column(name = "storage")
+
     private int storage;
 
     public Milk(String id, String name, String type, int storage) {
