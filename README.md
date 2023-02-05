@@ -1,4 +1,4 @@
-### Milk App Backend
+# Milk App Backend
 This repository contains the backend of the Milk App, a full stack application that allows users to view and filter different types of milk.
 
 ## Technologies
